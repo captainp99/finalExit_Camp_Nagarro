@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top " style="background-color: black!important;">
+    <a class="navbar-brand" routerLink="/home">Home</a>
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+      <ul class="navbar-nav">
+        
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/managecamp">Manage Camp</a>
+        </li>
+      </ul>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link active" routerLinkActive="active" routerLink="/login">Login</a>
+        </li>
+      </ul>
+  </div>
+  </nav>
+  <div style="background-image: url('../../assets/img/background15.jpg');background-repeat: no-repeat;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+  <div class="row row-no-gutters" style="max-width: 100%;">
+  
+    <div class="col-md-3" >
+        <app-filter ></app-filter> 
+     </div>
+     <div class="col-md-9">
+         <app-listofcamp ></app-listofcamp>
+     </div>
+    
+     
+  </div>
+</div>

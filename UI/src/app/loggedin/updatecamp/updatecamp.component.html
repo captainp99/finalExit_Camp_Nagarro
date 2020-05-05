@@ -1,0 +1,78 @@
+<div style="padding: 0%; margin-left: 35%;">
+  <pagination-controls class="pagination" id = "camp_pagination" maxSize="5" directionLinks="true" (pageChange) = "page = $event"></pagination-controls>
+</div>
+<div class="row" style="width: 100%; max-width: 100%;">
+<div class="row  align-items-center justify-content-center" style="width: 100%; max-width: 100%;" >
+ <div class="card col-md-3 align-items-center justify-content-center"  style="width: 500px; margin: 15px;margin-top: -12px; color: yellowgreen; font-weight: bolder; padding: 0px; background: rgba(0, 0, 0, 0.4);"
+     *ngFor = "let camp of service.list | paginate:{ id: 'camp_pagination', itemsPerPage:3,currentPage :page} ">
+    <img class="card-img-top" style="height: 200px; width: 100%;"  src="data:image/jpeg;base64,{{camp.ImageArray}}" alt="Card image cap">
+    <div class="card-body" >
+
+      <h5 class="card-title">{{camp.Name}}</h5>
+      <p class="card-text">{{camp.Description}}</p>
+    </div>
+    <ul class="list-group list-group-flush" >
+      <li class="list-group-item" style="background: none;">Price : {{camp.Price}}</li>
+      <li class="list-group-item" style="background: none;">Capacity : {{camp.Capacity}}</li>
+      
+    </ul>
+    <div class="text-center " style="margin-left: -10px;">
+        
+        <button   style="margin: 1rem;" class="btn btn-success" data-target="#login" data-toggle =  "modal"
+         (click)="populateForm(camp,camp.Id) ">Update</button>
+        
+        <button type="button" class="btn btn-danger" (click) = "deleteCamp(camp.Id)">Delete</button>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+
+
+<div id="login" #mymodal class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<div class="modal-content">
+  <div class="modal-body">
+    <button data-dismiss="modal" class="close">&times;</button>
+    <h4 style="text-align: center;">Update Camp</h4>
+    <form #form="ngForm" (submit)="onSubmit(form)" style="margin-top: 20px;" autocomplete="off">   
+        <div class="row row-no-gutters" style="max-width: 100%;">
+          <div class="form-group col-md-6" >
+            <div *ngIf="imageUrl == null">
+              <img  src="data:image/jpeg;base64,{{service.formData.ImageArray}}" style="width: 100%; height: 200px;">
+          </div>
+          <div *ngIf="imageUrl != null">
+         <img  [src]="imageUrl" style="max-width: 200px;max-height: 100px;">
+          </div>
+              <input type="file"  class="btn" #Image  accept="image/*" (change)="handleFileInput($event.target.files)" >
+          </div>
+          <div class="form-group col-md-6">
+          <div class="form-group">
+            <label >Name</label>
+            <input name="Name"  #Name="ngModel" [(ngModel)]="service.formData.Name" class="form-control">
+          </div>
+          <div class="form-group">
+              <label >Description</label>
+              <input name="Description"  #Description="ngModel" [(ngModel)]="service.formData.Description" class="form-control">
+            </div>
+            <div class="form-group">
+              <label >Price</label>
+              <input name="Price" type="number" #Price="ngModel" [(ngModel)]="service.formData.Price" class="form-control">
+            </div>
+            <div class="form-group">
+              <label >Capacity</label>
+              <input name="Capacity" type="number" #Capacity="ngModel" [(ngModel)]="service.formData.Capacity" class="form-control">
+            </div>
+            <button type="submit"  data-target="#login" data-toggle="modal" class="btn btn-danger">Finish</button>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
+</div>  
+</div> 
+
+

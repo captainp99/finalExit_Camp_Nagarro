@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black!important;">
+    <a class="navbar-brand" routerLink="/home" style="cursor: pointer;">Home</a>
+    
+  </nav>
+
+<div class="jumbotron" style="background: linear-gradient(to bottom right,rgb(24, 24, 24),rgb(241, 234, 236));">
+    <div class="align-items-center " style="margin-left: 300px;">
+    <form [formGroup]="booking" (ngSubmit)="getbooking()">
+        <div class="form-row ">
+            <label for="refno" class="col-mb-2 col-form-label"><b>Reference No. </b></label>
+            <div class="col-auto col-sm-5">
+              <input type="text" class="form-control mb-2" id="refno" placeholder="Enter Your Reference No." formControlName="refno" autocomplete="false" required>
+            </div>
+       
+        <div class="col-auto col-mb-2">
+            <button type="submit" class="btn btn-warning" [disabled]="!booking.valid" data-toggle="collapse" href="#form" >Submit</button>
+        </div>
+    </div>
+    </form>
+    </div>
+</div>
+
+<div class="collapse" id="form">
+    <div *ngIf = "!datatoshow" >
+        
+        <h1 style="margin-left: 150px;">Thank You For Visiting Our Camps!!! Please Rate Us...</h1>
+        <div>
+        <div style="margin-left: 500px;">
+        <app-rating [rating]='3' [itemId]='camp.Id' (ratingClick)='ratingComponentClick($event)'></app-rating> 
+       </div>
+       <div>
+        <button type="submit" class="btn btn-success" (click) = "OnSubmitRating(camp.Id)" style="margin-left: 30px; margin-top: 5px;">Confirm Rating</button><br> 
+     </div>
+    </div>
+    <div style="left: 700px;">
+     <img src="../../assets/img/smiley.jpg" alt="" style="width: 200px; height: 170px; margin-top: 15px; margin-right: -200px; transform: translate(-68%); ">
+     </div>
+    </div>
+    <div class="card" *ngIf  = "datatoshow">
+        
+      <div class="row"> 
+        <div class="col">
+            <div class="card-body">
+                <h4 class="card-title">Camp Name : {{camp.Name}} </h4>
+              
+               <hr>
+                <h5 class="card-title">Check-In Date : {{sDate}} </h5>
+                <h5 class="card-text">Check-Out Date : {{eDate}} </h5>
+                <h5 class="card-text">Total Amount : {{bookingDetails.TotalAmount}} </h5>
+                <h5 class="card-text">Billing Address : {{bookingDetails.BillingAddress}} </h5>
+                <h5 class="card-text">State : {{bookingDetails.State}} </h5>
+                <h5 class="card-text">Country : {{bookingDetails.Country}} </h5>
+                <h5 class="card-text">ZipCode : {{bookingDetails.ZipCode}} </h5>
+                <h5 class="card-text">CellPhone : {{bookingDetails.CellPhone}} </h5> 
+            </div>
+        </div>
+        <div class="col">
+    
+            <div class="card-body">
+               <img  src="data:image/jpeg;base64,{{camp.ImageArray}}"  alt="camp image" style="height: 300px ; width: 300px;" >
+            <br>
+        </div>
+
+        <button type="button" class="btn btn-danger"(click)="deleteBooking()" style="margin-left: 100px;">Cancel Booking</button>
+        
+        </div>
+       
+        </div>
+    </div>
+    
+</div>

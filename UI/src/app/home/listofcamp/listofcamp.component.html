@@ -1,0 +1,40 @@
+<div>
+  <pagination-controls id = "camp_pagination" maxSize="5" directionLinks="true" (pageChange) = "page = $event"></pagination-controls>
+</div>
+
+<div class="card mb-3 pagination" *ngFor = "let camp of service.list | paginate:{ id: 'camp_pagination', itemsPerPage:2,currentPage :page}"  style="background:rgba(0, 0,0, 0.2); color: white; cursor: pointer;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+          <img src= "data:image/jpeg;base64,{{camp.ImageArray}}"  class="card-img" style="border: 5px solid black; width: 100%; height:325px;" alt="An Image">
+        
+      </div>
+
+      <div class="col-md-8">
+        <div class="card-body">
+          <h4 class="card-title"><b>{{camp.Name}}</b></h4><hr>
+          <p class="card-text">{{camp.Description}}</p>
+          <p class="card-text"><strong>INR {{camp.Price}}</strong> per night</p>
+          <p class="card-text">Max : {{camp.Capacity}} persons</p>
+          
+          <div class="row col-md-6" >
+            <p>Avg. Ratings: </p> &nbsp; &nbsp;
+          <div *ngFor="let star of arrayOne(camp.Rating); let i = index;" >
+            <span class="fa fa-star checked" style="margin-right: 3px;"></span>
+          </div>
+          <hr>
+        </div>
+          <!-- <app-rating [rating]="camp.Rating" readonly></app-rating>  -->
+          
+          <button class="btn btn-success"  (click)="campbook(camp)" [disabled]="this.service.bookNowButtonControl == false">BookNow.. </button>
+        </div>
+
+        <small style="color:red; background-color: rgba(8, 8, 8, 0.568); padding: 1px; margin: 2px; border-radius: 2px; ">T&C Price on weekends will hike by <b>INR 200</b> per night</small>
+      </div>
+    </div>
+   
+  </div>
+    <div>
+      <pagination-controls id = "camp_pagination" maxSize="5" directionLinks="true" (pageChange) = "page = $event"></pagination-controls>
+    </div>
+
+  

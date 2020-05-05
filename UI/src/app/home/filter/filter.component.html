@@ -1,0 +1,26 @@
+<div class="card text-white bg-dark ml-3 mt-5" style="background-color: rgba(8, 8, 8, 0.3)!important;">
+    <div class="card-body">
+      <h2 class="card-title">Search</h2>
+      <br>
+      <form [formGroup]="search" (ngSubmit)="onSearch()">
+      <label for="checkInDate">Check-In</label>
+      <br>
+        <input type="date"  [min]="todayDate" class="form-control" id="checkInDate" formControlName="checkInDate" >
+        <br>
+    <label for="checkOutDate">Check-Out</label>
+    <br>
+        <input type="date"  [min]="todayDate" class="form-control" id="checkOutDate" formControlName="checkOutDate">
+        <br>
+        <label for="Capacity">Capacity</label>
+        <select name = "dropdown" class="form-control" id="dropdown" formControlName="dropdown">
+            <option value = "Any" selected>Any</option>
+            <option value = "1">1</option>
+            <option value = "2" >2</option>
+            <option value = "4">4</option>
+            <option value = "8">8</option>
+         </select>
+         <br>
+         <button type="submit" class="btn btn-secondary" style="margin-left: 55px;">Search</button>
+         </form>
+    </div>
+  </div>

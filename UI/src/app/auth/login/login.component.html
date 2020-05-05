@@ -1,0 +1,41 @@
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/home">Home</a>
+    
+  </nav> -->
+
+
+
+  <div class="sidenav" style="background-image: url(../../../assets/img/background5.jpg);
+    height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;">
+    <div class="login-main-text" style="transform: translate(-8%,-40%);">
+      <a class="navbar-brand" routerLink="/home">Back to Home</a>
+       <h2>Application<br> Login Page</h2>
+       <p>Login from here to Access.</p>
+    </div>
+ </div>
+ <div class="main">
+    <div class="col-md-6 col-sm-12">
+      
+       <div class="login-form">
+        <div class="loginForm">
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <label for="username">Username  </label>
+              <input type="text" formControlName="username" placeholder="Username" class="form-control" id="username" required >
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Password" formControlName="password" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-black" [disabled]="!loginForm.valid" >Submit</button>
+          </form>  
+        </div>
+        
+       </div>
+    </div>
+ </div>
+
+  

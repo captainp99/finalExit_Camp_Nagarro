@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: black!important;">
+  <a class="navbar-brand" routerLink="/home" style="cursor: pointer;">Home</a>
+  
+</nav>
+
+<div class="card border-dark" >
+    <div class="card-header"> 
+        <div class="row" *ngIf="camp">
+        <div class="col-md-4" style="height: 275px; ">
+            <img class="card-img-top" src="data:image/jpeg;base64,{{camp.ImageArray}}"  style="height:100%; width:100%;" alt="Card image cap">  
+        </div>
+        <div class="col-md-8">
+       <h3 class="card-title">Book Camp - {{ camp.Name }} </h3>
+       <h4> Description :&nbsp; {{camp.Description}}</h4>
+       <h4> Price :&nbsp; INR {{camp.Price}} per night</h4>                      
+        <h4>  Night Stay:&nbsp;{{noOfNormaldays  + noOfWeekend}} </h4>           
+       <h4>  Total Price :&nbsp;INR <b>{{noOfNormaldays*camp.Price  + noOfWeekend*(camp.Price+200)}}</b></h4>                           
+       </div>   
+    </div>                
+    </div>
+    
+    <div class="card-body">
+      <form class="needs-validation" novalidate [formGroup]="campBook" 
+                (ngSubmit)="onFormSubmit()"  ngNativeValidate>
+                <div class="form-row" >
+                  
+                   
+                  <div class="col-md-4 mb-3">
+                    <label for="billingaddress" >Billing Address</label>
+                    <input type="text" class="form-control" id="billingaddress" formControlName="billingaddress"  #billingAddress
+                      [ngClass]="getControlValidationClasses(billingaddressControl)" required>
+                    <div class="invalid-feedback" *ngIf="billingaddressControl.touched && billingaddressControl.errors?.required">
+                      This field is required
+                    </div>
+                  </div>
+                    <div class="col-md-4 mb-3">
+                      <label for="state">State</label>
+                      <input type="text" class="form-control" id="state" formControlName="state" #state
+                        [ngClass]="getControlValidationClasses(stateControl)" required>
+                      <div class="invalid-feedback" *ngIf="stateControl.touched && stateControl.errors?.required">
+                        This field is required
+                      </div>
+                     </div>
+                      <div class="col-md-4 mb-3">
+                          <label for="country">Country</label>
+                          <input type="text" class="form-control" id="country" formControlName="country" #country
+                            [ngClass]="getControlValidationClasses(countryControl)" required>
+                          <div class="invalid-feedback" *ngIf="countryControl.touched && countryControl.errors?.required">
+                            This field is required
+                          </div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                          <label for="Zip">Zip Code</label>
+                          <input type="number" class="form-control" id="zip" formControlName="zip" #Zip
+                              [ngClass]="getControlValidationClasses(zipControl)" required>
+                          <div class="invalid-feedback" *ngIf="zipControl.touched && zipControl.errors?.required">
+                              This field is required
+                          </div>
+                      </div>
+                      <div class="col-md-4 mb-3">
+                        <label for="Phone">Phone Number</label>
+                        <input type="number" class="form-control" id="phoneNumber" formControlName="phoneNumber" #Phone
+                            [ngClass]="getControlValidationClasses(phoneNumberControl)" required>
+                        <div class="invalid-feedback" *ngIf="phoneNumberControl.touched && phoneNumberControl.errors?.required">
+                            This field is required
+                        </div>
+                        <div class="invalid-feedback" *ngIf="phoneNumberControl.touched && phoneNumberControl.errors?.min">
+                                Phone Number should be of 10 digits.
+                        </div>
+                        <div class="invalid-feedback" *ngIf="phoneNumberControl.touched && phoneNumberControl.errors?.max">
+                          Phone Number should be of 10 digits.
+                  </div>
+                    </div>
+                      <div class="col-md-4 mb-3 " style="margin-top: 8px; " >
+                         <br>
+                        <button class="btn btn-primary" type="button" data-target="#login" [disabled] = "!campBook.valid" data-toggle="modal" href="#BlockUIConfirm"  style="margin-left: 15px;">Book Camp</button>
+
+                      </div>
+                  </div>
+              </form>
+          </div>
+  
+
+  <div id="login" #mymodal class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    
+    <div class="modal-content">
+      <div class="modal-body">
+        <button data-dismiss="modal" class="close">&times;</button>
+        <h4 style="text-align: center;">Recheck Your Details</h4>
+        <div class="confirm-body">
+            <p><b>StartDate:&nbsp;</b>{{campService.startdate}}</p>
+            <p><b>EndDate:&nbsp;</b>{{campService.enddate}}</p>
+              <p><b>BillingAddress:&nbsp;</b>{{billingAddress.value}}</p>
+              <p><b>State:&nbsp;</b>{{state.value}}</p>
+              <p><b>Country:&nbsp;</b>{{country.value}}</p>
+              <p><b>ZipCode:&nbsp;</b>{{Zip.value}}</p>
+              <p><b>CellPhone:&nbsp;</b>{{Phone.value}}</p>
+             
+          </div>
+          <div class="btn-holder pull-right">
+            <input type="submit" class="row-dialog-btn btn btn-primary" value="Yes, Accept" (click)="onFormSubmit()" data-target="#login" data-toggle="modal" href="#BlockUIConfirm"  />
+            <input type="button" class="row-dialog-btn btn btn-naked" value="No, Cancel" data-target="#login" data-toggle="modal" href="#BlockUIConfirm" />
+          </div>
+      </div>
+    </div>
+    </div>  
+    </div> 
